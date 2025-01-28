@@ -112,7 +112,7 @@ Ensure the following are installed on your system:
      npm start
      ```
 
-7. Access the application at `http://localhost:3000`.
+7. Access the application at `http://localhost:3001`.
 
 ---
 
