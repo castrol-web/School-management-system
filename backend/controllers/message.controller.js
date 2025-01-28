@@ -70,8 +70,8 @@ export const getUsersForSidebar = async (req, res) => {
         const loggedInUserId = req.user._id;
 
         // Find parents and teachers excluding the logged-in user
-        const filteredParents = await Parent.find({ _id: { $ne: loggedInUserId } }).select("-password");
-        const filteredTeachers = await Teacher.find({ _id: { $ne: loggedInUserId } }).select("-password");
+        const filteredParents = await Parent.find({ _id: { $ne: loggedInUserId } }).select("-password").populate({path:'commonDetails',select:"firstName lastName"});
+        const filteredTeachers = await Teacher.find({ _id: { $ne: loggedInUserId } }).select("-password").populate({path:'commonDetails',select:"firstName lastName"});
 
         // Combine parents and teachers into a single array
         const combinedUsers = [

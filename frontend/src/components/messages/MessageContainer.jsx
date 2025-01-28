@@ -35,7 +35,7 @@ const NoChatSelected = () => {
                 items-center gap-2'
                 aria-label="No chat selected message"
             >
-                <p>Welcome 👋 Banda ❄</p>
+                <p>Welcome 👋 To Chats ❄</p>
                 <p>Select a chat to start Messaging</p>
                 <TiMessages className='text-3xl md:text-6xl text-center' aria-hidden="true" />
             </div>
