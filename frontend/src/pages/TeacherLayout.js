@@ -53,6 +53,7 @@ function TeacherLayout() {
     const data = [{ name: "dashboard", icon: <MdDashboard className="mr-3" /> },
     { name: 'assignments', icon: <FaBook className="mr-3" /> },
     { name: 'marks', icon: <FaUserGraduate className="mr-3" /> },
+    { name: 'analysis', icon: <FaBook className="mr-3" /> },
     { name: 'entries', icon: <FaBook className="mr-3" /> },
     { name: 'activities', icon: <FaBook className="mr-3" /> }
     ]

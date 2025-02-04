@@ -14,8 +14,8 @@ const app = express();
 
 //cross origin middleware 
 app.use(cors({
-    origin: ["http://localhost:3001"],
-    methods: ['GET', 'PUT', 'DELETE', 'POST'],
+  origin: ["http://localhost:3001"],
+  methods: ['GET', 'PUT', 'DELETE', 'POST'],
 }));
 
 app.use(express.json());
@@ -25,29 +25,49 @@ app.use(bodyParser.json());
 const mongooseUrl = process.env.MONGOOSE_CONNECTION;
 //Database connection
 try {
-    await mongoose.connect(mongooseUrl);
-    console.log("DB connection successful");
+  await mongoose.connect(mongooseUrl);
+  console.log("DB connection successful");
 } catch (error) {
-    console.error("Error connecting to database:", error);
-    process.exit(1);
+  console.error("Error connecting to database:", error);
+  process.exit(1);
 }
 
 
-app.use("/api/admin",adminRoutes);
-app.use("/api/auth",authRoutes);
-app.use("/api/teacher",teacherRoutes);
-app.use("/api/parent",parentRoutes);
-app.use("/api/messages",messageRoutes);
-app.use("/api/users",userRoutes)
+app.use("/api/admin", adminRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/teacher", teacherRoutes);
+app.use("/api/parent", parentRoutes);
+app.use("/api/messages", messageRoutes);
+app.use("/api/users", userRoutes)
 
 const port = process.env.PORT || 8050
+
+// Example endpoint
+const FLASK_API_URL = 'http://127.0.0.1:5000/predict';
+
+//machine learning prediction api
+app.post('/predict', async (req, res) => {
+  try {
+
+    console.log("Received Data:", req.body);  // Log the data received by backend
+    // Send the request to Flask API
+    const response = await axios.post(FLASK_API_URL, req.body);
+
+    // Send the prediction result back to the frontend
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error processing the request');
+  }
+});
+
 //listening port 
 app.listen(port, "0.0.0.0", (err) => {
-    if (err) {
-        console.error("Error starting server:", err);
-        process.exit(1);
-    }
-    console.log(`listening on localhost:${port}`);
+  if (err) {
+    console.error("Error starting server:", err);
+    process.exit(1);
+  }
+  console.log(`listening on localhost:${port}`);
 })
 
 

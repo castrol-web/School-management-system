@@ -24,6 +24,7 @@ import AssignmentCreator from "./components/AssignmentCreator";
 import AssignmentViewer from "./parent/AssignmentViewer";
 import AddActivity from "./components/AddActivity";
 import EnrollActivity from "./parent/EnrollActivity";
+import Analytics from "./components/Analytics";
 
 
 //backend url
@@ -54,6 +55,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="activities" element={<AddActivity />} />
           <Route path="messages" element={<SendMessage />} />
+          <Route path="analysis" element={<Analytics />} />
           <Route path="assignments" element={<AssignmentCreator />} />
         </Route>
         {/* parents routes */}

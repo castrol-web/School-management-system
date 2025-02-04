@@ -436,6 +436,35 @@ router.get('/activities', authMiddleware, async (req, res) => {
     }
 });
 
+// student marks data for analytics
+router.get('/students-analytics', authMiddleware, async (req, res) => {
+    if (req.user.role !== 'teacher') {
+        return res.status(403).json({ message: "Access denied" });
+    }
+
+    try {
+        const students = await Marks.find()
+            .populate({
+                path: 'student',  // Path to populate
+                select: 'firstName lastName'  // Select the fields you need
+            })
+            .populate({
+                path: 'subject',  // Path to populate
+                select: 'name'  // Select the fields you need
+            })
+            .populate({
+                path: 'class',  // Path to populate
+                select: 'className'  // Select the fields you need
+            });
+
+        res.status(201).json(students);
+    } catch (error) {
+        console.error('Error fetching student data:', error);
+        res.status(500).json({ error: 'Failed to fetch student data' });
+    }
+});
+
+
 
 
 export default router;

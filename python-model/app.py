@@ -3,8 +3,12 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
+from flask_cors import CORS  # Importing CORS
 
 app = Flask(__name__)
+
+# Enable CORS for all domains or specify a specific domain (localhost:3001 for React frontend)
+CORS(app, origins="http://localhost:3001")  # Change this to your frontend's URL
 
 # Load data
 def load_marks_data():
